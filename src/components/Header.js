@@ -13,7 +13,9 @@ class Header extends React.Component {
           Day
         </h1>
         <h3 className="tagline">
-          <span>Fresh Seafood Market</span>
+          {/* 'this' refers to Header component instance */}
+          {/* use '$r' in console after selecting any component */}
+          <span>{this.props.tagline}</span> 
         </h3>
       </header>
     );
