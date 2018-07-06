@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
 
 class App extends React.Component {
 
@@ -13,6 +14,7 @@ class App extends React.Component {
     order: {}
   };
 
+  // fn to update state
   addFish = fish => {
     // 1. take a copy of the existing state
     const fishes = { ...this.state.fishes };
@@ -22,6 +24,11 @@ class App extends React.Component {
     this.setState({ fishes: fishes });
   };
 
+  // loading sample fishes data into state
+  loadSampleFishes = () => {
+    this.setState({ fishes: sampleFishes });
+  }
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -29,7 +36,8 @@ class App extends React.Component {
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory addFish={this.addFish} /> {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
+        {/* Anything that gets passed onto the compo is available in the props object of that compo */}
+        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} /> {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
       </div>
     );
   }
