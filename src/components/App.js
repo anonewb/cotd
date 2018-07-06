@@ -4,6 +4,7 @@ import Order from './Order';
 import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
+import base from '../base';
 
 /*
 App Compo {
@@ -27,6 +28,21 @@ class App extends React.Component {
   };
 
   // LIFECYCLE EVENTS
+  componentDidMount() {
+    const { params } = this.props.match;
+    // syncing our state with firebase
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: "fishes"
+    });
+  }
+
+  // this is req to be done to avoid memory leaks
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  // CUSTOM METHODS
   // fn to update state
   addFish = fish => {
     // 1. take a copy of the existing state
