@@ -61,7 +61,7 @@ class App extends React.Component {
             {Object.keys(this.state.fishes).map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)}
           </ul>
         </div>
-        <Order />
+        <Order fishes={this.state.fishes} order={this.state.order}/>
         {/* Anything that gets passed onto the compo is available in the props object of that compo */}
         <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} /> {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
       </div>
