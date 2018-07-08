@@ -67,6 +67,16 @@ class App extends React.Component {
     this.setState({ fishes: fishes });
   };
 
+  // fn to update state
+  updateFish = (key, updatedFish) => {
+    // 1. take a copy of the current fish state
+    const fishes = { ...this.state.fishes };
+    // 2. update that state
+    fishes[key] = updatedFish;
+    // 3. set that to state
+    this.setState({ fishes });
+  };
+
   // loading sample fishes data into state
   loadSampleFishes = () => {
     this.setState({ fishes: sampleFishes });
@@ -102,7 +112,9 @@ class App extends React.Component {
         {/* Anything that gets passed onto the compo is available in the props object of that compo */}
         <Inventory
           addFish={this.addFish}
+          updateFish={this.updateFish}
           loadSampleFishes={this.loadSampleFishes}
+          fishes={this.state.fishes}
         />{" "}
         {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
       </div>
