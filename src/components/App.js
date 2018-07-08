@@ -1,10 +1,10 @@
-import React from 'react';
-import Header from './Header';
-import Order from './Order';
-import Inventory from './Inventory';
-import sampleFishes from '../sample-fishes';
-import Fish from './Fish';
-import base from '../base';
+import React from "react";
+import Header from "./Header";
+import Order from "./Order";
+import Inventory from "./Inventory";
+import sampleFishes from "../sample-fishes";
+import Fish from "./Fish";
+import base from "../base";
 
 /*
 App Compo {
@@ -17,9 +17,8 @@ App Compo {
 
 // APP COMPO
 class App extends React.Component {
-
   // STATE
-  // created below state here in App compo coz 
+  // created below state here in App compo coz
   // 1. we want this state to be used in our entire app and
   // 2. data(like addFish property) can be passed to lower compo while lower to upper is not possible.
   state = {
@@ -56,7 +55,7 @@ class App extends React.Component {
   // loading sample fishes data into state
   loadSampleFishes = () => {
     this.setState({ fishes: sampleFishes });
-  }
+  };
 
   addToOrder = key => {
     // 1. take a copy of state
@@ -65,7 +64,7 @@ class App extends React.Component {
     order[key] = order[key] + 1 || 1;
     // 3. call setState to update our state object
     this.setState({ order });
-  }
+  };
 
   // RENDER
   render() {
@@ -74,12 +73,23 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
           <ul className="fishes">
-            {Object.keys(this.state.fishes).map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)}
+            {Object.keys(this.state.fishes).map(key => (
+              <Fish
+                key={key}
+                index={key}
+                details={this.state.fishes[key]}
+                addToOrder={this.addToOrder}
+              />
+            ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order}/>
+        <Order fishes={this.state.fishes} order={this.state.order} />
         {/* Anything that gets passed onto the compo is available in the props object of that compo */}
-        <Inventory addFish={this.addFish} loadSampleFishes={this.loadSampleFishes} /> {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
+        <Inventory
+          addFish={this.addFish}
+          loadSampleFishes={this.loadSampleFishes}
+        />{" "}
+        {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
       </div>
     );
   }
