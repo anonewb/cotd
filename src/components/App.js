@@ -57,7 +57,18 @@ class App extends React.Component {
   }
 
   // CUSTOM METHODS
-  // fn to update state
+
+  /*
+  MUST READ!!!
+  To Check below functions manually,
+  recommended!!
+  1. perform some actions related to the function
+  2. then inside react dev tools, select the compo where these functions are written
+  3. then inside console, write " $r.functionName() "
+  4. after this works properly, then pass this function to downsteam compo using props
+  */
+
+  // fn to update fishes state
   addFish = fish => {
     // 1. take a copy of the existing state
     const fishes = { ...this.state.fishes };
@@ -67,7 +78,7 @@ class App extends React.Component {
     this.setState({ fishes: fishes });
   };
 
-  // fn to update state
+  // fn to update fishes state
   updateFish = (key, updatedFish) => {
     // 1. take a copy of the current fish state
     const fishes = { ...this.state.fishes };
@@ -77,11 +88,22 @@ class App extends React.Component {
     this.setState({ fishes });
   };
 
+  // fn to update fishes state
+  deleteFish = key => {
+    // 1. take a copy of the current fish state
+    const fishes = { ...this.state.fishes };
+    // 2. update that state (for firebase)
+    fishes[key] = null;
+    // 3. update state
+    this.setState({ fishes });
+  };
+
   // loading sample fishes data into state
   loadSampleFishes = () => {
     this.setState({ fishes: sampleFishes });
   };
 
+  // fn to update order state
   addToOrder = key => {
     // 1. take a copy of state
     const order = { ...this.state.order };
@@ -90,6 +112,26 @@ class App extends React.Component {
     // 3. call setState to update our state object
     this.setState({ order });
   };
+
+  // fn to update order state
+  removeFromOrder = key => {
+    // 1. take a copy of state
+    const order = { ...this.state.order };
+    // 2. remove that item from order state (as we are not mirroring this data with firebase, we can use "delete --;")
+    delete order[key];
+    // 3. call setState to update our state object
+    this.setState({ order });
+  };
+
+  /*
+  MUST READ!!!
+  To Check above functions manually,
+  recommended!!
+  1. perform some actions related to the function
+  2. then inside react dev tools, select the compo where these functions are written
+  3. then inside console, write " $r.functionName() "
+  4. after this works properly, then pass this function to downsteam compo using props
+  */
 
   // RENDER
   render() {
@@ -108,11 +150,16 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          removeFromOrder={this.removeFromOrder}
+        />
         {/* Anything that gets passed onto the compo is available in the props object of that compo */}
         <Inventory
           addFish={this.addFish}
           updateFish={this.updateFish}
+          deleteFish={this.deleteFish}
           loadSampleFishes={this.loadSampleFishes}
           fishes={this.state.fishes}
         />{" "}
