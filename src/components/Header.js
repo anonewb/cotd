@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 /*
 // regular way of writing component
@@ -16,6 +17,7 @@ const Header = props => (
 );
 */
 
+// stateless functional compo
 const Header = props => (
   <header className="top">
     <h1>
@@ -33,5 +35,11 @@ const Header = props => (
     </h3>
   </header>
 );
+
+// since "Header" is a stateless functional compo, we can't use static
+// PropTypes used for compo validation
+Header.propTypes = {
+  tagline: PropTypes.string.isRequired
+};
 
 export default Header;

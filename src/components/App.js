@@ -1,4 +1,7 @@
+// 1st import from npm packages
 import React from "react";
+import PropTypes from "prop-types";
+// then import from relative paths
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -24,6 +27,10 @@ class App extends React.Component {
   state = {
     fishes: {},
     order: {}
+  };
+
+  static propTypes = {
+    match: PropTypes.object
   };
 
   // LIFECYCLE EVENTS

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class AddFishForm extends React.Component {
   nameRef = React.createRef();
@@ -6,6 +7,12 @@ class AddFishForm extends React.Component {
   statusRef = React.createRef();
   descRef = React.createRef();
   imageRef = React.createRef();
+
+  // PropTypes used for compo validation
+  // since "AddFishForm" is a regular react compo, we can use static to avoid duplications for each instance
+  static propTypes = {
+    addFish: PropTypes.func
+  };
 
   createFish = e => {
     e.preventDefault();

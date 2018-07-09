@@ -1,8 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getFunName } from "../helpers";
 
 class StorePicker extends React.Component {
   myInput = React.createRef();
+
+  static propTypes = {
+    history: PropTypes.object
+  };
 
   // binding in react
   // as we used "this" in pur custom fn below, to bind the method we converted to arrow fn which becomes property to component object thus value of "this" now point to StorePicker obj
