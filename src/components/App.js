@@ -169,6 +169,7 @@ class App extends React.Component {
           deleteFish={this.deleteFish}
           loadSampleFishes={this.loadSampleFishes}
           fishes={this.state.fishes}
+          storeId={this.props.match.params.storeId}
         />{" "}
         {/* "addFish" is stored in props and passed to further downward compo (like Inventory) where it can be accessed */}
       </div>
